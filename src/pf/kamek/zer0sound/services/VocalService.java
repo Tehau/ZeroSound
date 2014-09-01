@@ -1,7 +1,6 @@
 package pf.kamek.zer0sound.services;
 
 import android.accessibilityservice.AccessibilityService;
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
@@ -13,10 +12,7 @@ public class VocalService extends AccessibilityService {
 
         @Override
         protected void onServiceConnected() {
-                AccessibilityServiceInfo info = new AccessibilityServiceInfo();
-                info.eventTypes = AccessibilityEvent.TYPE_VIEW_TEXT_SELECTION_CHANGED;
-                info.feedbackType = AccessibilityServiceInfo.DEFAULT;
-                setServiceInfo(info);
+               super.onServiceConnected();
         }
 
         @Override

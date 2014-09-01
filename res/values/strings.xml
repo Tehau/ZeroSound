@@ -4,5 +4,17 @@
     <string name="app_name">zer0Sound</string>
     <string name="hello_world">n0 music !</string>
     <string name="action_settings">Settings</string>
+    <string name="accessibility_description">
+            For zer0Sound to function properly, it needs to be able to access your Google Now text box.\n 
+            \n
+            That way, the app will be able the handle tasks like :\n
+            - \"raise the volume\"\n
+            - \"skip that track\"\n
+            - \"suffle\"\n
+            - \"stop playing\"\n
+            - \"...\"\n
+            \n
+            Enjoy using zer0Sound !
+    </string>
 
 </resources>
