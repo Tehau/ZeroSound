@@ -30,6 +30,9 @@ proguard/
 
 
 ### Eclipse ###
+.project
+.classpath
+proguard-project.txt
 *.pydevproject
 .metadata
 .gradle
