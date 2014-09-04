@@ -1,93 +1,71 @@
 package pf.kamek.zer0sound.activities;
 
 import pf.kamek.zer0sound.R;
+import pf.kamek.zer0sound.events.TextChanged;
+import pf.kamek.zer0sound.pojos.Command;
+import pf.kamek.zer0sound.pojos.Volume;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 public class MainScreen extends Activity
 {
 
-        private AudioManager audioManager;
         private TextView lastCommand;
-        private Bundle extras;
+        private Command command;
+        private Volume volume;
+        private Context c;
+        private SharedPreferences prefs;
+        public boolean refresh;
 
         @Override
         public void onCreate(Bundle savedInstanceState)
         {
                 super.onCreate(savedInstanceState);
-                Log.d("zer0Sound", "[MainScreen] :  onCreate() called");
                 setContentView(R.layout.main_screen);
 
-                audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                c = this.getApplicationContext();
+                prefs = getSharedPreferences("pf.kamek.zer0Sound.core", MODE_PRIVATE);
+
+                volume = new Volume(c);
+                command = new Command();
 
                 lastCommand = (TextView) this.findViewById(R.id.last_command);
-                lastCommand.addTextChangedListener(new TextWatcher() {
-
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                                // TODO Auto-generated method stub
-
-                        }
-
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                                // TODO Auto-generated method stub
-
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                Log.d("zer0Sound", "[MainScreen] : last command changed");
-                        } 
-
-                });
+                lastCommand.setText(prefs.getString("lastCommand", "< no previous command >"));
+                lastCommand.addTextChangedListener(new TextChanged(command, volume)); 
         }
 
-
-
-        public void muteButtonClicked(View v)
+        protected void onResume() 
         {
-                audioManager.setStreamVolume(
-                                AudioManager.STREAM_MUSIC, 
-                                0,
-                                AudioManager.FLAG_VIBRATE);
-        }
-
-        public void midVolumeButtonClicked(View v)
-        {
-                audioManager.setStreamVolume(
-                                AudioManager.STREAM_MUSIC, 
-                                audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 2,
-                                AudioManager.FLAG_PLAY_SOUND);
-        }
-
-        protected void onResume() {
-                // TODO Auto-generated method stub
                 super.onResume();
-                Log.d("zer0Sound", "[MainScreen] :  onResume() called");
-                extras = this.getIntent().getExtras(); 
-                if (extras != null)
-                {
-                        Log.d("zer0Sound", "[MainScreen] : intent received : " + extras.getString("command"));
-                        if(extras.getString("command") != "[]")
-                                lastCommand.setText(extras.getString("command"));
+
+                if (prefs.getBoolean("refresh", true)) {
+                        String receivedCommand, displayCommand;
+                        receivedCommand = this.getIntent().getStringExtra("command"); 
+
+                        if (!receivedCommand.isEmpty() && receivedCommand != "[]") {
+                                command.setCommand(receivedCommand);
+                                command.strip();
+                                displayCommand = "< " + command.getCommand() + " >";
+                                prefs.edit().putString("lastCommand", displayCommand).commit();
+                                lastCommand.setText(displayCommand);
+                        }
+
+                        prefs.edit().putBoolean("refresh", false).commit();
                 }
         }
 
         @Override
-        protected void onNewIntent(Intent intent) {
-                // TODO Auto-generated method stub
+        protected void onNewIntent(Intent intent) 
+        {
                 super.onNewIntent(intent);
                 this.setIntent(intent);
-                Log.d("zer0Sound", "[MainScreen] :  onNewIntent() called");
+                prefs.edit().putBoolean("refresh", true).commit();
+                Log.d("zer0Sound", "[MainScreen] : onNewIntent");
         }
 }

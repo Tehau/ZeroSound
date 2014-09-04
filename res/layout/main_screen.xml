@@ -3,17 +3,6 @@
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
                 android:orientation="vertical">
-        <Button android:id="@+id/muteButton"
-                        android:layout_height="wrap_content"
-                        android:layout_width="fill_parent"
-                        android:onClick="muteButtonClicked"
-                        android:text="@string/mute" />
-
-        <Button android:id="@+id/midVolumeButton"
-                        android:layout_height="wrap_content"
-                        android:layout_width="fill_parent"
-                        android:onClick="midVolumeButtonClicked"
-                        android:text="@string/volume_50" />
 
         <LinearLayout android:layout_height="fill_parent"
                         android:layout_width="fill_parent"
