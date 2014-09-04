@@ -11,15 +11,12 @@ I know apps like that already exist, but I have some special requirements :
 - I want to be able to use Poweramp instead of the stock music player
 
 
-========================
-
 ## Usage :
 
 As I said, Google offers no API to allow us to work with Google Now, so I'm using an AccessibilityService
 that reads the searches performed through GoogleNow.
 For the app to work, you have to enable said service in Settings -> Accessibility -> zer0Sound
 
-========================
 
 ## Available commands :
 
@@ -29,7 +26,6 @@ I'm only getting started, so for now, I'm only able to control the volume.
 set the volume to X / volume X (the number has to be in the last position)
 ```
 
-========================
 
 ## Build :
 
