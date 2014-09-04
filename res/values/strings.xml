@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
         <string name="app_name">zer0Sound</string>
-        <string name="hello_world">n0 music !</string>
+        <string name="volume_50">Volume 50%</string>
+        <string name="mute">Mute</string>
+        <string name="last_command_desc">Your last command was</string>
+        <string name="last_command">&lt; no previous command &gt;</string>
         <string name="action_settings">Settings</string>
         <string name="accessibility_description">
                 For zer0Sound to function properly, it needs to be able to access your Google Now text box.\n 

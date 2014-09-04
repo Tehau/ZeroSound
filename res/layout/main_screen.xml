@@ -3,22 +3,39 @@
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
                 android:orientation="vertical">
-
-        <TextView android:id="@+id/text"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="Hello, I am a TextView" />
-
         <Button android:id="@+id/muteButton"
                         android:layout_height="wrap_content"
                         android:layout_width="fill_parent"
                         android:onClick="muteButtonClicked"
-                        android:text="Mute" />
+                        android:text="@string/mute" />
 
         <Button android:id="@+id/midVolumeButton"
                         android:layout_height="wrap_content"
                         android:layout_width="fill_parent"
                         android:onClick="midVolumeButtonClicked"
-                        android:text="Volume to 50%" />
+                        android:text="@string/volume_50" />
+
+        <LinearLayout android:layout_height="fill_parent"
+                        android:layout_width="fill_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                <TextView android:id="@+id/last_command_desc"
+                                android:layout_height="wrap_content"
+                                android:layout_width="fill_parent"
+                                android:gravity="center"
+                                android:textStyle="italic"
+                                android:paddingTop="-25dp"
+                                android:text="@string/last_command_desc" />
+
+                <TextView android:id="@+id/last_command"
+                                android:layout_height="wrap_content"
+                                android:layout_width="fill_parent"
+                                android:gravity="center"
+                                android:textSize="25dp"
+                                android:textStyle="bold|italic"
+                                android:text="@string/last_command" />
+
+        </LinearLayout>
 
 </LinearLayout>
