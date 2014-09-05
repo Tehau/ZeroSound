@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 public class MainScreen extends Activity
@@ -45,13 +44,16 @@ public class MainScreen extends Activity
                 super.onResume();
 
                 if (prefs.getBoolean("refresh", true)) {
-                        String receivedCommand, displayCommand;
-                        receivedCommand = this.getIntent().getStringExtra("command"); 
 
-                        if (!receivedCommand.isEmpty() && receivedCommand != "[]") {
+                        String receivedCommand, displayCommand;
+                        receivedCommand = new String("" + this.getIntent().getStringExtra("command")); 
+
+                        if (!receivedCommand.equals("null") && !receivedCommand.equals("[]")) {
                                 command.setCommand(receivedCommand);
                                 command.strip();
-                                displayCommand = "< " + command.getCommand() + " >";
+
+                                displayCommand = new String("< " + command.getCommand() + " >");
+
                                 prefs.edit().putString("lastCommand", displayCommand).commit();
                                 lastCommand.setText(displayCommand);
                         }
@@ -66,6 +68,5 @@ public class MainScreen extends Activity
                 super.onNewIntent(intent);
                 this.setIntent(intent);
                 prefs.edit().putBoolean("refresh", true).commit();
-                Log.d("zer0Sound", "[MainScreen] : onNewIntent");
         }
 }
