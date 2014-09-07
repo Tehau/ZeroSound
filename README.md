@@ -21,7 +21,7 @@ For the app to work, you have to enable said service in Settings -> Accessibilit
 ## Available commands :
 
 All of the commands I wanted when I started this now work.
-The way I manage commands within the app is ugly though, it needs come work
+The way I manage commands within the app is ugly though, it needs some work
 ```
 raise / lower the volume
 set the volume to X / volume X (the number has to be in the last position)

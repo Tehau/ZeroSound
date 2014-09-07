@@ -9,51 +9,63 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 // This class selects the appropriate action to trigger
 // depending on what the user said
 public class TextChanged implements TextWatcher
 {
 
+
         private Context ctx;
         private Command command;
         private Volume volume;
         private Player player;
 
-        public TextChanged(Context ctx, Command command, Volume volume, Player player) 
+        public TextChanged(Context ctx, Command command)
         {
                 this.ctx = ctx;
                 this.command = command;
-                this.volume = volume;
-                this.player = player;
+                this.volume = new Volume(ctx);
+                this.player = new Player(ctx);
         }
 
         // If the texts changes, then a new command has been received
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) 
         {
-                if (command.containsVolume()) {
-                        if (command.containsRaise()) {
+                String c = command.getCommand();
+
+                if (c.contains("volume")) {
+                        if (c.contains("raise")) {
                                 clearStack();
                                 volume.raiseVolume();
-                        } else if (command.containsLower()) {
+                                Toast.makeText(ctx, "Volume raised", Toast.LENGTH_SHORT).show();
+                        } else if (c.contains("lower")) {
                                 clearStack();
                                 volume.lowerVolume();
+                                Toast.makeText(ctx, "Volume lowered", Toast.LENGTH_SHORT).show();
                         } else {
                                 volume.setVolume(command.getVolume());
+                                Toast.makeText(ctx, "Volume changed to " + command.getVolume(), Toast.LENGTH_SHORT).show();
                         }
-                } else if (command.containsPlay()) {
-                        if (command.containsPlayMusic())
+                } else if (c.contains("play") || c.contains("playback")) {
+                        if (c.contains("music"))
                                 clearStack();
                         player.Play();
-                } else if (command.containsPause()) {
+                        Toast.makeText(ctx, "Playing music", Toast.LENGTH_SHORT).show();
+                } else if (c.contains("pause") || c.contains("stop")) {
                         player.Pause();
-                } else if (command.containsNext()) {
+                        Toast.makeText(ctx, "Music paused", Toast.LENGTH_SHORT).show();
+                } else if (c.contains("next") || c.contains("skip")) {
                         player.Next();
-                } else if (command.containsPrevious()) {
+                        Toast.makeText(ctx, "Playing next track", Toast.LENGTH_SHORT).show();
+                } else if (c.contains("previous") || c.contains("back")) {
                         player.Previous();
-                } else if (command.containsShuffle()) {
+                        Toast.makeText(ctx, "Playing previous track", Toast.LENGTH_SHORT).show();
+                } else if (c.contains("shuffle")) { 
                         player.Shuffle();
+                        Toast.makeText(ctx, "Playlist shuffled", Toast.LENGTH_SHORT).show();
                 }
         }
 

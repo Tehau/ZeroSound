@@ -1,24 +1,24 @@
 package pf.kamek.zer0sound.pojos;
 
-import java.util.Locale;
+import pf.kamek.zer0sound.R;
+import pf.kamek.zer0sound.activities.MainScreen;
+
+import android.content.SharedPreferences;
+import android.widget.TextView;
 
 // This class contains the last command and some control methods
 public class Command 
 {
 
         private String command;
+        private SharedPreferences prefs;
+        private TextView lastCommand;
 
-        public Command() 
+        public Command(MainScreen act, SharedPreferences prefs) 
         {
                 this.command = new String();
-        }
-
-        public Command(String command) 
-        {
-                this.command = new String() + 
-                		command.toLowerCase(new Locale(command));
-                
-                strip();
+                this.prefs = prefs;
+                lastCommand = (TextView) act.findViewById(R.id.last_command);
         }
 
         // Gets rid of the "[]" that surrounds the command returned by Google Now
@@ -31,100 +31,13 @@ public class Command
                         command = command.substring(1, command.length() - 1);
         }
 
-        // Checks if the user said the word "volume"
-        public boolean containsVolume()
-        {
-                if (command.contains("volume"))
-                        return true;
-                else
-                        return false;
-        }
-
-        // Checks if the user said the word "raise"
-        public boolean containsRaise()
-        {
-                if (command.contains("raise"))
-                        return true;
-                else
-                        return false;
-        }
-
-        // Checks if the user said the word "lower"
-        public boolean containsLower()
-        {
-                if (command.contains("lower"))
-                        return true;
-                else
-                        return false;
-        }
-
-        // Checks if the user said the word "play" or "playback"
-        public boolean containsPlay()
-        {
-                if (command.contains("play") || command.contains("playback"))
-                {
-                    return true;
-                }
-                else
-                        return false;
-        }
-
-        // Checks if the user said the word "play" and "music"
-        public boolean containsPlayMusic()
-        {
-                if (command.contains("play") && command.contains("music"))
-                {
-                    return true;
-                }
-                else
-                        return false;
-        }
-
-        // Checks if the user said the word "stop"
-        public boolean containsPause()
-        {
-                if (command.contains("stop") || command.contains("pause"))
-                        return true;
-                else
-                        return false;
-        }
-
-        // Checks if the user said the word "next"
-        public boolean containsNext()
-        {
-                if (command.contains("next"))
-                        return true;
-                else
-                        return false;
-        }
-
-
-        // Checks if the user said the word "previous"
-        public boolean containsPrevious()
-        {
-                if (command.contains("previous") || command.contains("back"))
-                        return true;
-                else
-                        return false;
-        }
-
-        // Checks if the user said the word "previous"
-        public boolean containsShuffle()
-        {
-                if (command.contains("shuffle"))
-                        return true;
-                else
-                        return false;
-        }
-
         // Gets the number the user said when trying to change the volume
         public int getVolume()
         {
                 int volume = 50;
                 String[] tmp;
 
-                if (containsVolume())
-                {
+                if (command.contains("volume")) {
                         tmp = command.split(" "); 
 
                         // Trying to parse the last word as the volume
@@ -154,6 +67,9 @@ public class Command
         public void setCommand(String command) 
         {
                 this.command = command;
+                strip();
+                lastCommand.setText("< " + this.command + " >");
+                prefs.edit().putString("lastCommand", lastCommand.getText().toString()).commit();
         }
 
 }
