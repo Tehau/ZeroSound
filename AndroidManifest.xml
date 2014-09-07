@@ -6,6 +6,8 @@ encoding="UTF-8"?>
                 android:versionName="1.0">
         <uses-sdk android:minSdkVersion="8"
                         android:targetSdkVersion="21" />
+	<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+	<uses-permission android:name="android.permission.GET_TASKS" />
 
         <application 
                 android:allowBackup="true"
@@ -24,7 +26,8 @@ encoding="UTF-8"?>
 
                 <service 
                         android:name=".services.VocalService"
-                        android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+                        android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+>
 
                         <intent-filter>
                                 <action android:name="android.accessibilityservice.AccessibilityService" />

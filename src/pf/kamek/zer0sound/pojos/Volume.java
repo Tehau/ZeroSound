@@ -17,7 +17,7 @@ public class Volume
         }
 
         // Changes volume to a specific value, 0 being the minimum and 100 the maximum
-        public void setVolumeTo(int volume)
+        public void setVolume(int volume)
         {
                 if (volume >= 0 && volume <= 100) {
                         audioManager.setStreamVolume(
@@ -26,4 +26,22 @@ public class Volume
                                         AudioManager.FLAG_PLAY_SOUND);
                 }
         }
+
+        public void raiseVolume()
+        {
+                audioManager.setStreamVolume(
+                                AudioManager.STREAM_MUSIC, 
+                                AudioManager.ADJUST_RAISE, 
+                                AudioManager.FLAG_PLAY_SOUND);
+        }
+
+        public void lowerVolume()
+        {
+                audioManager.setStreamVolume(
+                                AudioManager.STREAM_MUSIC, 
+                                AudioManager.ADJUST_LOWER, 
+                                AudioManager.FLAG_PLAY_SOUND);
+        }
+
+
 }

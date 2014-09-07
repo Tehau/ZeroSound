@@ -3,8 +3,8 @@ package pf.kamek.zer0sound.activities;
 import pf.kamek.zer0sound.R;
 import pf.kamek.zer0sound.events.TextChanged;
 import pf.kamek.zer0sound.pojos.Command;
+import pf.kamek.zer0sound.pojos.Player;
 import pf.kamek.zer0sound.pojos.Volume;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +18,7 @@ public class MainScreen extends Activity
         private TextView lastCommand;
         private Command command;
         private Volume volume;
+        private Player player;
         private Context c;
         private SharedPreferences prefs;
         public boolean refresh;
@@ -32,11 +33,12 @@ public class MainScreen extends Activity
                 prefs = getSharedPreferences("pf.kamek.zer0Sound.core", MODE_PRIVATE);
 
                 volume = new Volume(c);
+                player = new Player(c);
                 command = new Command();
 
                 lastCommand = (TextView) this.findViewById(R.id.last_command);
                 lastCommand.setText(prefs.getString("lastCommand", "< no previous command >"));
-                lastCommand.addTextChangedListener(new TextChanged(command, volume)); 
+                lastCommand.addTextChangedListener(new TextChanged(c, command, volume, player)); 
         }
 
         protected void onResume() 
@@ -46,7 +48,7 @@ public class MainScreen extends Activity
                 if (prefs.getBoolean("refresh", true)) {
 
                         String receivedCommand, displayCommand;
-                        receivedCommand = new String("" + this.getIntent().getStringExtra("command")); 
+                        receivedCommand = new String() + this.getIntent().getStringExtra("command");
 
                         if (!receivedCommand.equals("null") && !receivedCommand.equals("[]")) {
                                 command.setCommand(receivedCommand);

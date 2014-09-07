@@ -20,10 +20,16 @@ For the app to work, you have to enable said service in Settings -> Accessibilit
 
 ## Available commands :
 
-I'm only getting started, so for now, I'm only able to control the volume.
-
+All of the commands I wanted when I started this now work.
+The way I manage commands within the app is ugly though, it needs come work
 ```
+raise / lower the volume
 set the volume to X / volume X (the number has to be in the last position)
+play music / resume playback
+stop the music
+next
+previous / go back a track
+shuffle
 ```
 
 

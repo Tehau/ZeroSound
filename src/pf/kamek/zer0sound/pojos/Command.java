@@ -1,5 +1,7 @@
 package pf.kamek.zer0sound.pojos;
 
+import java.util.Locale;
+
 // This class contains the last command and some control methods
 public class Command 
 {
@@ -8,12 +10,14 @@ public class Command
 
         public Command() 
         {
-                this.command = "";
+                this.command = new String();
         }
 
         public Command(String command) 
         {
-                this.command = command.toLowerCase();
+                this.command = new String() + 
+                		command.toLowerCase(new Locale(command));
+                
                 strip();
         }
 
@@ -31,6 +35,83 @@ public class Command
         public boolean containsVolume()
         {
                 if (command.contains("volume"))
+                        return true;
+                else
+                        return false;
+        }
+
+        // Checks if the user said the word "raise"
+        public boolean containsRaise()
+        {
+                if (command.contains("raise"))
+                        return true;
+                else
+                        return false;
+        }
+
+        // Checks if the user said the word "lower"
+        public boolean containsLower()
+        {
+                if (command.contains("lower"))
+                        return true;
+                else
+                        return false;
+        }
+
+        // Checks if the user said the word "play" or "playback"
+        public boolean containsPlay()
+        {
+                if (command.contains("play") || command.contains("playback"))
+                {
+                    return true;
+                }
+                else
+                        return false;
+        }
+
+        // Checks if the user said the word "play" and "music"
+        public boolean containsPlayMusic()
+        {
+                if (command.contains("play") && command.contains("music"))
+                {
+                    return true;
+                }
+                else
+                        return false;
+        }
+
+        // Checks if the user said the word "stop"
+        public boolean containsPause()
+        {
+                if (command.contains("stop") || command.contains("pause"))
+                        return true;
+                else
+                        return false;
+        }
+
+        // Checks if the user said the word "next"
+        public boolean containsNext()
+        {
+                if (command.contains("next"))
+                        return true;
+                else
+                        return false;
+        }
+
+
+        // Checks if the user said the word "previous"
+        public boolean containsPrevious()
+        {
+                if (command.contains("previous") || command.contains("back"))
+                        return true;
+                else
+                        return false;
+        }
+
+        // Checks if the user said the word "previous"
+        public boolean containsShuffle()
+        {
+                if (command.contains("shuffle"))
                         return true;
                 else
                         return false;
