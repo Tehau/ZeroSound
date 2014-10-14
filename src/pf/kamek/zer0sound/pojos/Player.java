@@ -26,7 +26,7 @@ public class Player
         public void Pause()
         {
                 Intent intent = new Intent(PowerampAPI.ACTION_API_COMMAND);
-                intent.putExtra(PowerampAPI.COMMAND, PowerampAPI.Commands.PAUSE);
+                intent.putExtra(PowerampAPI.COMMAND, PowerampAPI.Commands.STOP);
                 ctx.startService(intent);
                 Toast.makeText(ctx, "Music paused", Toast.LENGTH_SHORT).show();
         }

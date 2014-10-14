@@ -30,24 +30,4 @@ public class Volume
                         Toast.makeText(ctx, "Volume changed to " + volume, Toast.LENGTH_SHORT).show();
                 }
         }
-
-        public void raiseVolume()
-        {
-                audioManager.setStreamVolume(
-                                AudioManager.STREAM_MUSIC,
-                                AudioManager.ADJUST_RAISE,
-                                AudioManager.FLAG_PLAY_SOUND);
-                Toast.makeText(ctx, "Volume raised", Toast.LENGTH_SHORT).show();
-        }
-
-        public void lowerVolume()
-        {
-                audioManager.setStreamVolume(
-                                AudioManager.STREAM_MUSIC,
-                                AudioManager.ADJUST_LOWER,
-                                AudioManager.FLAG_PLAY_SOUND);
-                Toast.makeText(ctx, "Volume lowered", Toast.LENGTH_SHORT).show();
-        }
-
-
 }

@@ -27,9 +27,7 @@ public class MainScreen extends Activity
                 prefs = getSharedPreferences("pf.kamek.zer0Sound.core", MODE_PRIVATE);
 
                 command = new Command(this, prefs);
-
                 lastCommand = (TextView) this.findViewById(R.id.last_command);
-
                 lastCommand.setText(prefs.getString("lastCommand", "< no previous command >"));
                 lastCommand.addTextChangedListener(new TextChanged(this, command));
         }

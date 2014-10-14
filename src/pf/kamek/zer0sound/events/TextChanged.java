@@ -14,9 +14,6 @@ import android.text.TextWatcher;
 // depending on what the user said
 public class TextChanged implements TextWatcher
 {
-
-
-
         private Context ctx;
         private Command command;
         private Volume volume;
@@ -37,13 +34,7 @@ public class TextChanged implements TextWatcher
                 String c = command.getCommand();
 
                 if (c.contains("volume")) {
-                        if (c.contains("raise")) {
-                                volume.raiseVolume();
-                        } else if (c.contains("lower")) {
-                                volume.lowerVolume();
-                        } else {
-                                volume.setVolume(command.getVolume());
-                        }
+                        volume.setVolume(command.getVolume());
                 } else if (c.contains("play") || c.contains("playback")) {
                         player.Play();
                 } else if (c.contains("stop")) {
@@ -61,19 +52,13 @@ public class TextChanged implements TextWatcher
 
         public void clearStack()
         {
-                Intent i;
-                String GOOGLE_PKG = "com.google.android.googlequicksearchbox";
                 PackageManager manager = ctx.getPackageManager();
-                try {
-                        i = manager.getLaunchIntentForPackage(GOOGLE_PKG);
-                        if (i == null)
-                                throw new PackageManager.NameNotFoundException();
-                        i.addCategory(Intent.CATEGORY_LAUNCHER);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-                        ctx.startActivity(i);
-                } catch (PackageManager.NameNotFoundException e) {
-
-                }
+                Intent intent = manager.getLaunchIntentForPackage("com.google.android.googlequicksearchbox");
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                ctx.startActivity(intent);
         }
 
         @Override
