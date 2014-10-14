@@ -1,15 +1,14 @@
 package pf.kamek.zer0sound.events;
 
-import pf.kamek.zer0sound.activities.MainScreen;
 import pf.kamek.zer0sound.pojos.Command;
 import pf.kamek.zer0sound.pojos.Player;
 import pf.kamek.zer0sound.pojos.Volume;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.Toast;
 
 // This class selects the appropriate action to trigger
 // depending on what the user said
@@ -17,7 +16,7 @@ public class TextChanged implements TextWatcher
 {
 
 
-    
+
         private Context ctx;
         private Command command;
         private Volume volume;
@@ -39,43 +38,42 @@ public class TextChanged implements TextWatcher
 
                 if (c.contains("volume")) {
                         if (c.contains("raise")) {
-                                clearStack();
                                 volume.raiseVolume();
-                                Toast.makeText(ctx, "Volume raised", Toast.LENGTH_SHORT).show();
                         } else if (c.contains("lower")) {
-                                clearStack();
                                 volume.lowerVolume();
-                                Toast.makeText(ctx, "Volume lowered", Toast.LENGTH_SHORT).show();
                         } else {
                                 volume.setVolume(command.getVolume());
-                                Toast.makeText(ctx, "Volume changed to " + command.getVolume(), Toast.LENGTH_SHORT).show();
                         }
                 } else if (c.contains("play") || c.contains("playback")) {
-                                clearStack();
                         player.Play();
-                        Toast.makeText(ctx, "Playing music", Toast.LENGTH_SHORT).show();
-                } else if (c.contains("stop") || c.contains("pause")) {
+                } else if (c.contains("stop")) {
                         player.Pause();
-                        Toast.makeText(ctx, "Music paused", Toast.LENGTH_SHORT).show();
                 } else if (c.contains("next") || c.contains("skip")) {
                         player.Next();
-                        Toast.makeText(ctx, "Playing next track", Toast.LENGTH_SHORT).show();
                 } else if (c.contains("previous") || c.contains("back")) {
                         player.Previous();
-                        Toast.makeText(ctx, "Playing previous track", Toast.LENGTH_SHORT).show();
                 } else if (c.contains("shuffle")) {
                         player.Shuffle();
-                        Toast.makeText(ctx, "Playlist shuffled", Toast.LENGTH_SHORT).show();
                 }
+
+                clearStack();
         }
 
         public void clearStack()
         {
+                Intent i;
+                String GOOGLE_PKG = "com.google.android.googlequicksearchbox";
                 PackageManager manager = ctx.getPackageManager();
-                Intent intent = manager.getLaunchIntentForPackage("com.google.android.googlequicksearchbox");
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                ctx.startActivity(intent);
+                try {
+                        i = manager.getLaunchIntentForPackage(GOOGLE_PKG);
+                        if (i == null)
+                                throw new PackageManager.NameNotFoundException();
+                        i.addCategory(Intent.CATEGORY_LAUNCHER);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                        ctx.startActivity(i);
+                } catch (PackageManager.NameNotFoundException e) {
+
+                }
         }
 
         @Override
