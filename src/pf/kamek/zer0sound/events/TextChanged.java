@@ -1,9 +1,9 @@
 package pf.kamek.zer0sound.events;
 
+import pf.kamek.zer0sound.activities.MainScreen;
 import pf.kamek.zer0sound.pojos.Command;
 import pf.kamek.zer0sound.pojos.Player;
 import pf.kamek.zer0sound.pojos.Volume;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +17,7 @@ public class TextChanged implements TextWatcher
 {
 
 
+    
         private Context ctx;
         private Command command;
         private Volume volume;
@@ -32,7 +33,7 @@ public class TextChanged implements TextWatcher
 
         // If the texts changes, then a new command has been received
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) 
+        public void onTextChanged(CharSequence s, int start, int before, int count)
         {
                 String c = command.getCommand();
 
@@ -50,11 +51,10 @@ public class TextChanged implements TextWatcher
                                 Toast.makeText(ctx, "Volume changed to " + command.getVolume(), Toast.LENGTH_SHORT).show();
                         }
                 } else if (c.contains("play") || c.contains("playback")) {
-                        if (c.contains("music"))
                                 clearStack();
                         player.Play();
                         Toast.makeText(ctx, "Playing music", Toast.LENGTH_SHORT).show();
-                } else if (c.contains("pause") || c.contains("stop")) {
+                } else if (c.contains("stop") || c.contains("pause")) {
                         player.Pause();
                         Toast.makeText(ctx, "Music paused", Toast.LENGTH_SHORT).show();
                 } else if (c.contains("next") || c.contains("skip")) {
@@ -63,7 +63,7 @@ public class TextChanged implements TextWatcher
                 } else if (c.contains("previous") || c.contains("back")) {
                         player.Previous();
                         Toast.makeText(ctx, "Playing previous track", Toast.LENGTH_SHORT).show();
-                } else if (c.contains("shuffle")) { 
+                } else if (c.contains("shuffle")) {
                         player.Shuffle();
                         Toast.makeText(ctx, "Playlist shuffled", Toast.LENGTH_SHORT).show();
                 }
@@ -79,13 +79,13 @@ public class TextChanged implements TextWatcher
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) 
+        public void beforeTextChanged(CharSequence s, int start, int count, int after)
         {
 
         }
 
         @Override
-        public void afterTextChanged(Editable s) 
+        public void afterTextChanged(Editable s)
         {
 
         }

@@ -5,7 +5,6 @@ import pf.kamek.zer0sound.events.TextChanged;
 import pf.kamek.zer0sound.pojos.Command;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ public class MainScreen extends Activity
 
         private TextView lastCommand;
         private Command command;
-        private Context ctx;
         private SharedPreferences prefs;
         public boolean refresh;
 
@@ -26,17 +24,17 @@ public class MainScreen extends Activity
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.main_screen);
 
-                ctx = this.getApplicationContext();
                 prefs = getSharedPreferences("pf.kamek.zer0Sound.core", MODE_PRIVATE);
 
                 command = new Command(this, prefs);
 
                 lastCommand = (TextView) this.findViewById(R.id.last_command);
+
                 lastCommand.setText(prefs.getString("lastCommand", "< no previous command >"));
-                lastCommand.addTextChangedListener(new TextChanged(ctx, command)); 
+                lastCommand.addTextChangedListener(new TextChanged(this, command));
         }
 
-        protected void onResume() 
+        protected void onResume()
         {
                 super.onResume();
 
@@ -45,7 +43,7 @@ public class MainScreen extends Activity
                         String receivedCommand;
                         receivedCommand = new String() + this.getIntent().getStringExtra("command");
 
-                        if (!receivedCommand.equals("null") && !receivedCommand.equals("[]")) 
+                        if (!receivedCommand.equals("null") && !receivedCommand.equals("[]"))
                                 command.setCommand(receivedCommand);
 
                         prefs.edit().putBoolean("refresh", false).commit();
@@ -53,7 +51,7 @@ public class MainScreen extends Activity
         }
 
         @Override
-        protected void onNewIntent(Intent intent) 
+        protected void onNewIntent(Intent intent)
         {
                 super.onNewIntent(intent);
                 this.setIntent(intent);

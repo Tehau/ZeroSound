@@ -9,7 +9,7 @@ public class Player
 {
         private Context ctx;
 
-        public Player(Context ctx) 
+        public Player(Context ctx)
         {
                 this.ctx = ctx;
         }

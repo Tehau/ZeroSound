@@ -7,14 +7,14 @@ import android.content.SharedPreferences;
 import android.widget.TextView;
 
 // This class contains the last command and some control methods
-public class Command 
+public class Command
 {
 
         private String command;
         private SharedPreferences prefs;
         private TextView lastCommand;
 
-        public Command(MainScreen act, SharedPreferences prefs) 
+        public Command(MainScreen act, SharedPreferences prefs)
         {
                 this.command = new String();
                 this.prefs = prefs;
@@ -22,7 +22,7 @@ public class Command
         }
 
         // Gets rid of the "[]" that surrounds the command returned by Google Now
-        public void strip() 
+        public void strip()
         {
                 char first = command.charAt(0);
                 char last = command.charAt(command.length() - 1);
@@ -38,7 +38,7 @@ public class Command
                 String[] tmp;
 
                 if (command.contains("volume")) {
-                        tmp = command.split(" "); 
+                        tmp = command.split(" ");
 
                         // Trying to parse the last word as the volume
                         // "Set the volume to X"
@@ -47,7 +47,6 @@ public class Command
                         } catch (NumberFormatException e) {
                                 return volume;
                         }
-                        
                 }
 
                 return volume;
@@ -56,7 +55,7 @@ public class Command
         /**
          * @return the command
          */
-        public String getCommand() 
+        public String getCommand()
         {
                 return command;
         }
@@ -64,7 +63,7 @@ public class Command
         /**
          * @param command the command to set
          */
-        public void setCommand(String command) 
+        public void setCommand(String command)
         {
                 this.command = command;
                 strip();
