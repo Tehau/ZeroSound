@@ -1,8 +1,12 @@
-package pf.kamek.zer0sound.activities;
+package me.zerocore.zerosound.activities;
 
-import pf.kamek.zer0sound.R;
-import pf.kamek.zer0sound.events.TextChanged;
-import pf.kamek.zer0sound.pojos.Command;
+import android.net.Uri;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import me.zerocore.zerosound.R;
+import me.zerocore.zerosound.events.TextChanged;
+import me.zerocore.zerosound.pojos.Command;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,7 +28,7 @@ public class MainScreen extends Activity
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.main_screen);
 
-                prefs = getSharedPreferences("pf.kamek.zer0Sound.core", MODE_PRIVATE);
+                prefs = getSharedPreferences("me.zerocore.zerosound.core", MODE_PRIVATE);
 
                 command = new Command(this, prefs);
                 lastCommand = (TextView) this.findViewById(R.id.last_command);
@@ -55,4 +59,27 @@ public class MainScreen extends Activity
                 this.setIntent(intent);
                 prefs.edit().putBoolean("refresh", true).commit();
         }
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.list_options, menu);
+
+		return true;
+	}
+
+	// Handles menu item clicks
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.zerocore) {
+			String url = "http://zerocore.me";
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(Uri.parse(url));
+			startActivity(i);
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
 }

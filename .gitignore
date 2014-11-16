@@ -1,4 +1,6 @@
 # Created by http://www.gitignore.io
+.idea/
+*.iml
 
 ### Android ###
 # Built application files
@@ -58,7 +60,7 @@ local.properties
 # PDT-specific
 .buildpath
 
-# sbteclipse plugin 
+# sbteclipse plugin
 .target
 
 # TeXlipse plugin

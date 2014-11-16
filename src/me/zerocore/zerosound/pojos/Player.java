@@ -1,4 +1,4 @@
-package pf.kamek.zer0sound.pojos;
+package me.zerocore.zerosound.pojos;
 
 import android.content.Context;
 import android.content.Intent;

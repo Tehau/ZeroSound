@@ -1,7 +1,7 @@
-package pf.kamek.zer0sound.pojos;
+package me.zerocore.zerosound.pojos;
 
-import pf.kamek.zer0sound.R;
-import pf.kamek.zer0sound.activities.MainScreen;
+import me.zerocore.zerosound.R;
+import me.zerocore.zerosound.activities.MainScreen;
 
 import android.content.SharedPreferences;
 import android.widget.TextView;

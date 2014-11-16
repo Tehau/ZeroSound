@@ -1,8 +1,8 @@
-package pf.kamek.zer0sound.events;
+package me.zerocore.zerosound.events;
 
-import pf.kamek.zer0sound.pojos.Command;
-import pf.kamek.zer0sound.pojos.Player;
-import pf.kamek.zer0sound.pojos.Volume;
+import me.zerocore.zerosound.pojos.Command;
+import me.zerocore.zerosound.pojos.Player;
+import me.zerocore.zerosound.pojos.Volume;
 
 import android.content.Context;
 import android.content.Intent;

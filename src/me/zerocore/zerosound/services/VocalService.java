@@ -1,7 +1,7 @@
-package pf.kamek.zer0sound.services;
+package me.zerocore.zerosound.services;
 
 
-import pf.kamek.zer0sound.activities.MainScreen;
+import me.zerocore.zerosound.activities.MainScreen;
 import android.accessibilityservice.AccessibilityService;
 import android.content.Intent;
 import android.util.Log;
