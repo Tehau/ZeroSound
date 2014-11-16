@@ -9,15 +9,14 @@
         <string name="no_previous_command">&lt; set the volume to 30 &gt;</string>
         <string name="action_settings">Settings</string>
         <string name="accessibility_description">
-                For ZeroSound to function properly, it needs to be able to access your Google Now text box.\n
-                \n
-                That way, the app will be able the handle tasks like :\n
+                ZeroSound needs to be able to access your Google Now text box to run as intended.\n\n
+                That way, the app will be able to handle tasks like :\n
                 - \"raise the volume\"\n
                 - \"next\"\n
                 - \"shuffle\"\n
                 - \"stop playing\"\n
                 - \"...\"\n
                 \n
-                Enjoy using ZeroSound!
+                Enjoy using ZeroSound !
         </string>
 </resources>
